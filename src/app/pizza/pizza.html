@@ -1,0 +1,9 @@
+<div class="container text-center">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
+        @for (pizza of pizzas; track $index) {
+            <div class="col">
+                <app-lista-pizzas [name]="pizza.name" [price]="pizza.price" [ingredients]="pizza.ingredients" [imgSource]="pizza.imgSource"></app-lista-pizzas>
+            </div>
+        }
+    </div>
+</div>
