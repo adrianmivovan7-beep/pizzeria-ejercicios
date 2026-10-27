@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss'
 })
+
 export class Navbar{
   @Output() filtroIngredientes = new EventEmitter<string>();
 

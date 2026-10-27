@@ -1,1 +1,110 @@
-<p>formulario works!</p>
+<div class="title p-4">
+    <h2>Haz tu pedido</h2>
+</div>
+
+<div class="container border p-4">
+    <form [formGroup]="pedidoForm" (ngSubmit)="realizarPedido()">
+
+        <div class="mb-3">
+            <label for="hora" class="form-label">Hora:</label>
+            <input id="hora" type="time" class="form-control" formControlName="hora">
+
+            @if (pedidoForm.get('hora')?.touched && pedidoForm.get('hora')?.invalid) {
+            <small class="text-danger">Selecciona una hora.</small>
+            }
+        </div>
+
+        <div class="mb-3">
+            <label for="direccion" class="form-label">Direccion de entrega:</label>
+            <input id="direccion" type="text" class="form-control" formControlName="direccion">
+
+            @if (pedidoForm.get('direccion')?.touched && pedidoForm.get('direccion')?.hasError('required')) {
+            <small class="text-danger">Introduce la direccion.</small>
+            }
+
+            @if (pedidoForm.get('direccion')?.touched && pedidoForm.get('direccion')?.hasError('minlength')) {
+            <small class="text-danger">La direccion debe tener al menos 10 caracteres.</small>
+            }
+
+            @if (pedidoForm.get('direccion')?.touched && pedidoForm.get('direccion')?.hasError('maxlength')) {
+            <small class="text-danger">La direccion no puede superar los 150 caracteres.</small>
+            }
+        </div>
+
+        <div class="mb-3">
+            <label for="pizza" class="form-label">Pizza:</label>
+            <select id="pizza" class="form-select" formControlName="pizza">
+                <option value="">Elige una pizza</option>
+                @for (pizza of pizzas; track pizza.valor) {
+                <option [value]="pizza.valor">
+                    {{ pizza.nombre }} - {{ pizza.precio }} €
+                </option>
+                }
+            </select>
+
+            @if (pedidoForm.get('pizza')?.touched && pedidoForm.get('pizza')?.invalid) {
+            <small class="text-danger">Selecciona una pizza.</small>
+            }
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label d-block">Tipo de pago:</label>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="bizum" value="bizum" formControlName="pago"
+                    (change)="actualizarValidacionesPago()">
+                <label class="form-check-label" for="bizum">BIZUM</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="tarjeta" value="tarjeta" formControlName="pago"
+                    (change)="actualizarValidacionesPago()">
+                <label class="form-check-label" for="tarjeta">Tarjeta</label>
+            </div>
+
+            @if (pedidoForm.get('pago')?.touched && pedidoForm.get('pago')?.invalid) {
+            <div>
+                <small class="text-danger">Selecciona un tipo de pago.</small>
+            </div>
+            }
+        </div>
+
+        @if (pedidoForm.get('pago')?.value === 'bizum') {
+        <div class="mb-3">
+            <label for="telefono" class="form-label">Telefono:</label>
+            <input id="telefono" type="tel" class="form-control" formControlName="telefono">
+
+            @if (pedidoForm.get('telefono')?.touched && pedidoForm.get('telefono')?.hasError('required')) {
+            <small class="text-danger">Introduce tu telefono.</small>
+            }
+
+            @if (pedidoForm.get('telefono')?.touched && pedidoForm.get('telefono')?.hasError('pattern')) {
+            <small class="text-danger">Introduce un telefono valido (ejemplo: 612345678).</small>
+            }
+        </div>
+        }
+
+        @if (pedidoForm.get('pago')?.value === 'tarjeta') {
+        <div class="mb-3">
+            <label for="cuenta" class="form-label">Numero de cuenta (IBAN):</label>
+            <input id="cuenta" type="text" class="form-control" formControlName="cuenta">
+
+            @if (pedidoForm.get('cuenta')?.touched && pedidoForm.get('cuenta')?.hasError('required')) {
+            <small class="text-danger">Introduce tu numero de cuenta.</small>
+            }
+
+            @if (pedidoForm.get('cuenta')?.touched && pedidoForm.get('cuenta')?.hasError('pattern')) {
+            <small class="text-danger">El IBAN debe empezar por ES y contener 22 digitos.</small>
+            }
+        </div>
+        }
+
+        <button type="submit" class="btn btn-primary">
+            Realizar pedido
+        </button>
+    </form>
+
+    @if (mensaje) {
+    <p class="mt-3">{{ mensaje }}</p>
+    }
+</div>

@@ -1,4 +1,5 @@
 
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -9,8 +10,10 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
   templateUrl: './formulario.html',
   styleUrl: './formulario.scss'
 })
-export class Formulario implements OnInit{
+
+export class Formulario implements OnInit {
   pedidoForm!: FormGroup;
+  mensaje: string = '';
 
   pizzas = [
     { nombre: 'Pizza margarita', valor: 'margarita', precio: 10 },
@@ -19,8 +22,6 @@ export class Formulario implements OnInit{
     { nombre: 'Pizza carnivora', valor: 'carnivora', precio: 13.5 }
   ];
 
-  mensaje: string = '';
-
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -28,21 +29,49 @@ export class Formulario implements OnInit{
       hora: ['', Validators.required],
       direccion: ['', Validators.required],
       pizza: ['', Validators.required],
-      pago: ['', Validators.required]
+      pago: ['', Validators.required],
+      telefono: [''],
+      cuenta: ['']
     });
+  }
 
-    console.log('Formulario iniciado');
+  actualizarValidacionesPago(): void {
+    const pago = this.pedidoForm.get('pago')?.value;
+    const telefono = this.pedidoForm.get('telefono')!;
+    const cuenta = this.pedidoForm.get('cuenta')!;
+
+    telefono.clearValidators();
+    cuenta.clearValidators();
+
+    if (pago === 'bizum') {
+      telefono.setValidators([
+        Validators.required,
+        Validators.pattern(/^(\+34)?[6789]\d{8}$/)
+      ]);
+      cuenta.setValue('');
+    } else if (pago === 'tarjeta') {
+      cuenta.setValidators([
+        Validators.required,
+        Validators.pattern(/^ES\d{22}$/i)
+      ]);
+      telefono.setValue('');
+    } else {
+      telefono.setValue('');
+      cuenta.setValue('');
+    }
+
+    telefono.updateValueAndValidity();
+    cuenta.updateValueAndValidity();
+    this.mensaje = '';
   }
 
   realizarPedido(): void {
     if (this.pedidoForm.invalid) {
       this.pedidoForm.markAllAsTouched();
-      this.mensaje = 'Completa todos los campos del formulario.';
+      this.mensaje = 'Revisa los campos marcados antes de continuar.';
       return;
     }
 
-    console.log('Pedido realizado:', this.pedidoForm.value);
-    this.mensaje = 'Pedido realizado correctamente.';
     this.pedidoForm.reset();
   }
 }
