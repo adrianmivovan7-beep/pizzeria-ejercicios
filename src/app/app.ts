@@ -1,13 +1,19 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+
+import { Component } from '@angular/core';
+import { Navbar } from './navbar/navbar';
 import { Pizza } from './pizza/pizza';
+import { Formulario } from './formulario/formulario';
 
 @Component({
-  imports: [Pizza],
   selector: 'app-root',
-  styleUrl: './app.scss',
+  imports: [Navbar, Pizza, Formulario],
   templateUrl: './app.html',
+  styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('pizzeria-ejercicios');
+  ingredienteSeleccionado = '';
+
+  filtrarPorIngrediente(ingrediente: string) {
+    this.ingredienteSeleccionado = ingrediente;
+  }
 }

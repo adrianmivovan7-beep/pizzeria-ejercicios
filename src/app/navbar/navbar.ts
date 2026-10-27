@@ -1,9 +1,25 @@
-import { Component } from '@angular/core';
+
+import { Component, EventEmitter, Output} from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  imports: [],
   selector: 'app-navbar',
-  styleUrl: './navbar.scss',
+  standalone: true,
+  imports: [FormsModule],
   templateUrl: './navbar.html',
+  styleUrl: './navbar.scss'
 })
-export class Navbar {}
+export class Navbar{
+  @Output() filtroIngredientes = new EventEmitter<string>();
+
+  ingrediente: string = '';
+
+  filtrarPizzas(): void {
+    this.filtroIngredientes.emit(this.ingrediente.trim());
+  }
+
+  limpiarFiltro(): void {
+    this.ingrediente = '';
+    this.filtrarPizzas();
+  }
+}

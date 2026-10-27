@@ -1,97 +1,24 @@
-<section id="nav">
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTT7Ff9ei8LVkXchLcn2BP7tbr0bdA0w9wUkgtnGfb6mA&s=10"
-          alt="Bootstrap" width="30" height="30" class="">
-        ADRIAN
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" href="#pizzas">Ver Pizzas</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#pedido">Pedir Pizzas</a>
-          </li>
-        </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
-    </div>
-  </nav>
-</section>
 
-<section id="main">
-  <section id="pizzas">
-    <header>
-      <div class="title p-4">
-        <h1>Pizzeria4V</h1>
-      </div>
-    </header>
+<app-navbar
+  (ingredienteSeleccionado)="filtrarPorIngrediente($event)">
+</app-navbar>
 
-    <app-pizza></app-pizza>
+<main>
+  <section id="pizzas" class="container py-4">
+    <h1 class="text-center mb-4">4V Pizza</h1>
+
+    <app-pizza
+      [ingrediente]="ingredienteSeleccionado">
+    </app-pizza>
   </section>
 
+  <section id="pedido" class="container py-4">
+    <h2 class="text-center mb-4">Haz tu pedido</h2>
 
-  <section class="p-3" id="pedido">
-    <div class="title p-4">
-      <h2>Haz tu pedido</h2>
-    </div>
-    <div class="container border color-black p-4">
-      <form>
-        <div class="mb-3">
-          <div>
-            <label for="hora" class="form-label">Hora: </label>
-            <input id="hora" name="hora" type="time" required>
-          </div>
-        </div>
-        <div class="mb-3">
-          <div>
-            <label for="direccion" class="form-label">Dirección de entrega: </label>
-            <input id="direccion" name="direccion" type="text" required>
-          </div>
-        </div>
-        <div class="mb-3">
-          <label for="pizza">Pizza: </label>
-          <select id="pizza" name="pizza" required>
-            <option value="" disabled selected>Elige una pizza</option>
-            <option value="margarita">Pizza margarita - 10€</option>
-            <option value="pepperoni">Pizza pepperoni - 12€</option>
-            <option value="barbacoa">Pizza barbacoa - 12€</option>
-            <option value="carnivora">Pizza carnívora - 13.50€</option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <label class="form-label d-block fw-bold">Tipo de pago:</label>
-
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="pago-bizum" name="pago" value="bizum">
-            <label class="form-check-label" for="pago-bizum">BIZUM</label>
-          </div>
-
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="pago-tarjeta" name="pago" value="tarjeta">
-            <label class="form-check-label" for="pago-tarjeta">Tarjeta</label>
-          </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Realizar pedido</button>
-      </form>
-    </div>
+    <app-formulario></app-formulario>
   </section>
-</section>
+</main>
 
-<section id="footer">
-  <footer>
-    <div class="container text-center">
-      <p>© 2026 Pizzeria4V. Todos los derechos reservados.</p>
-    </div>
-  </footer>
-</section>
+<footer class="bg-dark text-white text-center p-3">
+  <p class="mb-0">© 2026 4V Pizza</p>
+</footer>
