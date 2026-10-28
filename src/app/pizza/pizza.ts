@@ -1,11 +1,4 @@
-
-import {
-  Component,
-  Input,
-  OnInit,
-  OnChanges,
-  SimpleChanges
-} from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { PizzaModel } from '../models/PizzaModel';
 import { ListaPizzas } from '../lista-pizzas/lista-pizzas';
 

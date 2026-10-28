@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Navbar } from './navbar/navbar';
 import { Pizza } from './pizza/pizza';
 import { Formulario } from './formulario/formulario';
@@ -11,12 +11,8 @@ import { Formulario } from './formulario/formulario';
   styleUrl: './app.scss'
 })
 
-export class App implements OnInit {
+export class App{
   filtroActual: string = '';
-
-  ngOnInit(): void {
-    console.log('Aplicacion iniciada');
-  }
 
   actualizarFiltro(ingrediente: string): void {
     this.filtroActual = ingrediente;
