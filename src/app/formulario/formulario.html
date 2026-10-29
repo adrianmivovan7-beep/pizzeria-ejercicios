@@ -79,7 +79,7 @@
             }
 
             @if (pedidoForm.get('telefono')?.touched && pedidoForm.get('telefono')?.hasError('pattern')) {
-            <small class="text-danger">Introduce un telefono valido (ejemplo: 612345678).</small>
+            <small class="text-danger">Introduce un telefono valido (ejemplo: +34612345678).</small>
             }
         </div>
         }
@@ -94,7 +94,7 @@
             }
 
             @if (pedidoForm.get('cuenta')?.touched && pedidoForm.get('cuenta')?.hasError('pattern')) {
-            <small class="text-danger">El IBAN debe empezar por ES y contener 22 digitos.</small>
+            <small class="text-danger">El número de la tarjeta debe contener 16 digitos.</small>
             }
         </div>
         }

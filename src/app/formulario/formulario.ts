@@ -52,7 +52,7 @@ export class Formulario implements OnInit {
     } else if (pago === 'tarjeta') {
       cuenta.setValidators([
         Validators.required,
-        Validators.pattern(/^ES\d{22}$/i)
+        Validators.pattern(/^\d{16}$/i)
       ]);
       telefono.setValue('');
     } else {
