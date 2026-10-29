@@ -41,7 +41,7 @@ export class Pizza implements OnInit, OnChanges {
       'Pizza carnivora',
       '13,50€',
       'Ingredientes: tomate, mozzarella, carne picada, pepperoni, salchichas',
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVZoncjyLbaKDryZE0jfw5nwoEvcI7XddSdB5xS7klhg&s=10'
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcDjP4sSLOBdxwrvgZ9CSlH3mLrsqobyx6-Ofn7IDxIA&s=10'
     );
 
     this.pizzasCompletas = [pizza1, pizza2, pizza3, pizza4];
