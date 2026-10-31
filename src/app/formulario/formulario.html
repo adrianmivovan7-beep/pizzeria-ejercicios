@@ -90,7 +90,7 @@
             <input id="cuenta" type="text" class="form-control" formControlName="cuenta">
 
             @if (pedidoForm.get('cuenta')?.touched && pedidoForm.get('cuenta')?.hasError('required')) {
-            <small class="text-danger">Introduce tu numero de cuenta.</small>
+            <small class="text-danger">Introduce tu numero de tarjeta.</small>
             }
 
             @if (pedidoForm.get('cuenta')?.touched && pedidoForm.get('cuenta')?.hasError('pattern')) {

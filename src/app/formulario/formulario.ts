@@ -1,5 +1,3 @@
-
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -31,37 +29,37 @@ export class Formulario implements OnInit {
       pizza: ['', Validators.required],
       pago: ['', Validators.required],
       telefono: [''],
-      cuenta: ['']
+      tarjeta: ['']
     });
   }
 
   actualizarValidacionesPago(): void {
     const pago = this.pedidoForm.get('pago')?.value;
     const telefono = this.pedidoForm.get('telefono')!;
-    const cuenta = this.pedidoForm.get('cuenta')!;
+    const tarjeta = this.pedidoForm.get('tarjeta')!;
 
     telefono.clearValidators();
-    cuenta.clearValidators();
+    tarjeta.clearValidators();
 
     if (pago === 'bizum') {
       telefono.setValidators([
         Validators.required,
         Validators.pattern(/^(\+34)?[6789]\d{8}$/)
       ]);
-      cuenta.setValue('');
+      tarjeta.setValue('');
     } else if (pago === 'tarjeta') {
-      cuenta.setValidators([
+      tarjeta.setValidators([
         Validators.required,
         Validators.pattern(/^\d{16}$/i)
       ]);
       telefono.setValue('');
     } else {
       telefono.setValue('');
-      cuenta.setValue('');
+      tarjeta.setValue('');
     }
 
     telefono.updateValueAndValidity();
-    cuenta.updateValueAndValidity();
+    tarjeta.updateValueAndValidity();
     this.mensaje = '';
   }
 

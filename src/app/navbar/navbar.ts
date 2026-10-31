@@ -1,5 +1,5 @@
 
-import { Component, EventEmitter, Output} from '@angular/core';
+import { Component, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 })
 
 export class Navbar{
-  @Output() filtroIngredientes = new EventEmitter<string>();
+  filtroIngredientes = output<string>();
 
   ingrediente: string = '';
 

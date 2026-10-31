@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { PizzaModel } from '../models/PizzaModel';
 import { ListaPizzas } from '../lista-pizzas/lista-pizzas';
 
@@ -10,7 +10,7 @@ import { ListaPizzas } from '../lista-pizzas/lista-pizzas';
   styleUrl: './pizza.scss'
 })
 export class Pizza implements OnInit, OnChanges {
-  @Input() filtro: string = '';
+  filtro = input('');
 
   pizzasCompletas: PizzaModel[] = [];
   pizzasFiltradas: PizzaModel[] = [];
@@ -55,7 +55,7 @@ export class Pizza implements OnInit, OnChanges {
   }
 
   private filtrarLista(): void {
-    const ingrediente = this.filtro.trim().toLowerCase();
+    const ingrediente = this.filtro().trim().toLowerCase();
 
     if (ingrediente === '') {
       this.pizzasFiltradas = this.pizzasCompletas;

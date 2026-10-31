@@ -11,3 +11,10 @@ export class PizzaModel {
         this.imgSource = imgSource;
     }
 }
+
+export interface PizzaPedido {
+  name: string;
+  price: string;
+  ingredients: string;
+  cantidad: number;
+}
